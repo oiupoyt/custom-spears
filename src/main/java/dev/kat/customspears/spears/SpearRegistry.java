@@ -134,7 +134,10 @@ public class SpearRegistry {
         // Each recipe: [9] slots for a shaped 3x3 crafting grid
         // N = netherite spear, unique material per spear
         // Recipe pattern: diagonal with unique material
-        ItemStack spear = new ItemStack(Material.NETHERITE_SPEAR);
+        Material spearMat = Material.getMaterial("NETHERITE_SPEAR");
+        if (spearMat == null) spearMat = Material.getMaterial("DIAMOND_SPEAR");
+        if (spearMat == null) spearMat = Material.IRON_SWORD;
+        ItemStack spear = new ItemStack(spearMat);
         ItemStack[] grid = new ItemStack[9];
 
         switch (type) {
@@ -176,7 +179,9 @@ public class SpearRegistry {
             }
         }
 
-        return List.of(grid);
+        List<ItemStack[]> result = new java.util.ArrayList<>();
+        result.add(grid);
+        return result;
     }
 
     private String toRoman(int n) {

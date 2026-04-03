@@ -60,8 +60,7 @@ public class SpearHitListener implements Listener {
                 handleRupture(attacker, target, cfg, cd, tm);
             }
             case THUNDERSPEAR -> {
-                handleLifesteal_none(); // no lifesteal on thunderspear
-                handleLightningChain(attacker, target, cfg, cd, tm);
+handleLightningChain(attacker, target, cfg, cd, tm);
             }
             case ASHEN -> {
                 handleShatter(attacker, target, cfg, cd);
@@ -74,10 +73,6 @@ public class SpearHitListener implements Listener {
             }
         }
 
-        // Sanguine lifesteal applies regardless
-        if (type == SpearType.SANGUINE) {
-            handleLifesteal(attacker, damage, cfg);
-        }
     }
 
     // ─── Frostbite ───────────────────────────────────────────────────────────
@@ -109,8 +104,6 @@ public class SpearHitListener implements Listener {
         attacker.setHealth(newHp);
         attacker.getWorld().spawnParticle(Particle.HEART, attacker.getLocation().add(0, 2, 0), 3, 0.3, 0.3, 0.3, 0);
     }
-
-    private void handleLifesteal_none() {} // placeholder for spears without lifesteal
 
     // ─── Rupture ─────────────────────────────────────────────────────────────
 
@@ -224,7 +217,7 @@ public class SpearHitListener implements Listener {
         );
         armorAttr.addModifier(mod);
 
-        target.getWorld().spawnParticle(Particle.CRIT_MAGIC, target.getLocation().add(0, 1, 0), 15, 0.3, 0.5, 0.3, 0.2);
+        target.getWorld().spawnParticle(Particle.ENCHANTED_HIT, target.getLocation().add(0, 1, 0), 15, 0.3, 0.5, 0.3, 0.2);
         target.getWorld().playSound(target.getLocation(), Sound.ITEM_SHIELD_BREAK, 0.7f, 1.2f);
 
         UUID targetUUID = targetPlayer.getUniqueId();

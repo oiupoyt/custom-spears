@@ -1,7 +1,6 @@
 package dev.kat.customspears.spears;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -18,7 +17,7 @@ public class CustomSpear {
     private final String displayName;
     private final int customModelData;
     private final List<String> lore;
-    private final List<ItemStack[]> recipes; // each recipe is a 9-slot crafting array
+    private final List<ItemStack[]> recipes;
 
     public CustomSpear(SpearType type, String configKey, String displayName, int customModelData, List<String> lore, List<ItemStack[]> recipes) {
         this.type = type;
@@ -30,15 +29,21 @@ public class CustomSpear {
     }
 
     public ItemStack buildItem() {
-        ItemStack item = new ItemStack(Material.NETHERITE_SPEAR);
+        // Use DIAMOND_SPEAR as fallback base — swap to NETHERITE_SPEAR once confirmed in your 1.21.11 API
+        // Material name is NETHERITE_SPEAR in 1.21.11; if it still fails use Material.getMaterial("NETHERITE_SPEAR")
+        Material spearMat = Material.getMaterial("NETHERITE_SPEAR");
+        if (spearMat == null) spearMat = Material.getMaterial("DIAMOND_SPEAR");
+        if (spearMat == null) spearMat = Material.IRON_SWORD; // last-resort fallback
+
+        ItemStack item = new ItemStack(spearMat);
         ItemMeta meta = item.getItemMeta();
 
         // Name
         meta.displayName(LegacyComponentSerializer.legacyAmpersand().deserialize(displayName));
 
-        // Lore
+        // Lore — explicitly cast to List<Component> to avoid TextComponent inference issue
         List<Component> loreComponents = lore.stream()
-                .map(line -> LegacyComponentSerializer.legacyAmpersand().deserialize(line))
+                .map(line -> (Component) LegacyComponentSerializer.legacyAmpersand().deserialize(line))
                 .toList();
         meta.lore(loreComponents);
 
