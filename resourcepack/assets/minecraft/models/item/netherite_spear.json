@@ -1,0 +1,32 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "item/netherite_spear"
+  },
+  "overrides": [
+    {
+      "predicate": { "custom_model_data": 1001 },
+      "model": "item/custom_spears/nightmare_spear"
+    },
+    {
+      "predicate": { "custom_model_data": 1002 },
+      "model": "item/custom_spears/sanguine_spear"
+    },
+    {
+      "predicate": { "custom_model_data": 1003 },
+      "model": "item/custom_spears/thunderspear"
+    },
+    {
+      "predicate": { "custom_model_data": 1004 },
+      "model": "item/custom_spears/ashen_spear"
+    },
+    {
+      "predicate": { "custom_model_data": 1005 },
+      "model": "item/custom_spears/phantom_spear"
+    },
+    {
+      "predicate": { "custom_model_data": 1006 },
+      "model": "item/custom_spears/fortune_spear"
+    }
+  ]
+}

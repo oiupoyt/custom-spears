@@ -1,0 +1,194 @@
+# =============================================
+# CustomSpears - config.yml
+# =============================================
+# All durations are in seconds unless noted as ticks.
+# Effect levels: 0 = level I, 1 = level II, 2 = level III, etc.
+# custom-model-data: unique integer ID used to assign a texture via resource pack.
+#   Each spear has its own ID. In your resource pack, override the base spear item
+#   and add a predicate for custom_model_data matching these values.
+# =============================================
+
+spears:
+
+  # --------------------------------------------------
+  # NIGHTMARE SPEAR
+  # A defensive spear that chills enemies and lets
+  # you escape and return to a marked position.
+  # --------------------------------------------------
+  nightmare:
+    # Display name (supports & color codes)
+    name: "&5&lNightmare Spear"
+    # Custom model data ID — assign a texture in your resource pack using this value
+    custom-model-data: 1001
+    # Base item (all custom spears use netherite_spear as the base)
+    # PASSIVE — Warding: Reduces all incoming damage by a flat percentage while holding this spear
+    warding-reduction-percent: 15.0  # % of each incoming hit that is negated (e.g. 15 = 15% less damage)
+    # ABILITY 1 (On Hit) — Frostbite: Applies Slowness and Blindness to the enemy on hit
+    frostbite-cooldown: 8            # Seconds before Frostbite can trigger again
+    frostbite-slowness-level: 2      # Effect level (2 = Slowness III)
+    frostbite-slowness-duration: 5   # How long Slowness lasts in seconds
+    frostbite-blindness-duration: 3  # How long Blindness lasts in seconds
+    # ABILITY 2 (Right-click) — Recall: Marks your current position. Right-click again to teleport back to it.
+    recall-cooldown: 20              # Seconds before you can set a new mark after teleporting back
+    recall-mark-expiry: 300          # Seconds until the mark expires if unused
+
+  # --------------------------------------------------
+  # SANGUINE SPEAR
+  # A life-draining spear that sustains you through
+  # combat and cripples enemies hit with its active.
+  # --------------------------------------------------
+  sanguine:
+    name: "&c&lSanguine Spear"
+    custom-model-data: 1002
+    # PASSIVE — Lifesteal: Heals you for a percentage of damage dealt on every hit
+    lifesteal-percent: 8.0           # % of damage dealt returned as health (e.g. 8 = 8% lifesteal)
+    # ABILITY 1 (On Hit) — Rupture: Plants a delayed damage burst on the enemy that explodes after X seconds
+    rupture-cooldown: 10             # Seconds before Rupture can trigger again
+    rupture-delay: 2                 # Seconds after hit before the burst damage fires
+    rupture-damage: 6.0              # Damage dealt by the burst (in half-hearts)
+    # ABILITY 2 (Right-click) — Suppress: Disables the target's custom spear abilities and prevents jumping for 30s
+    suppress-cooldown: 25            # Seconds before Suppress can be used again
+    suppress-duration: 30            # Seconds the target's spear is disabled and they cannot jump
+
+  # --------------------------------------------------
+  # THUNDERSPEAR
+  # A high-voltage spear with a survival passive and
+  # chain lightning that jumps between nearby enemies.
+  # --------------------------------------------------
+  thunderspear:
+    name: "&e&lThunderspear"
+    custom-model-data: 1003
+    # PASSIVE — Storm Surge: When you drop to or below X hearts, lightning strikes all nearby enemies,
+    #           applying Slowness and Blindness. Has a cooldown to prevent constant triggering.
+    storm-surge-trigger-hearts: 5.0  # HP threshold to trigger Storm Surge (5.0 = 2.5 hearts shown)
+    storm-surge-radius: 10.0         # Block radius around you that enemies are struck
+    storm-surge-cooldown: 30         # Seconds before Storm Surge can trigger again
+    storm-surge-slowness-level: 1    # Effect level for Slowness (1 = Slowness II)
+    storm-surge-slowness-duration: 4 # Seconds Slowness lasts on struck enemies
+    storm-surge-blindness-duration: 3 # Seconds Blindness lasts on struck enemies
+    # ABILITY 1 (On Hit) — Lightning Chain: Strikes the hit target with lightning, then chains to nearby
+    #           players within range, striking each with lightning too
+    chain-cooldown: 6                # Seconds before Lightning Chain can trigger again
+    chain-radius: 5.0                # Block radius from the hit target in which nearby players are chained
+    chain-max-targets: 4             # Maximum number of additional players the chain can jump to
+    chain-damage: 4.0                # Damage dealt to each chained target (in half-hearts, separate from lightning)
+    # ABILITY 2 (Right-click) — Vault: Launches you forward and upward like a pole vault
+    vault-cooldown: 12               # Seconds before Vault can be used again
+    vault-forward-power: 1.4         # Horizontal launch force (higher = farther forward)
+    vault-upward-power: 0.9          # Vertical launch force (higher = more height)
+
+  # --------------------------------------------------
+  # ASHEN SPEAR
+  # A berserker spear — kills feed your power and
+  # your active abilities punish grouped enemies.
+  # --------------------------------------------------
+  ashen:
+    name: "&8&lAshen Spear"
+    custom-model-data: 1004
+    # PASSIVE — Bloodthirst: Each kill grants bonus max health temporarily
+    bloodthirst-hp-per-kill: 2.0     # Max HP gained per kill (in half-hearts)
+    bloodthirst-max-bonus-hp: 10.0   # Maximum bonus HP that can be stacked (in half-hearts)
+    bloodthirst-duration: 30         # Seconds bonus HP lasts before fading
+    # ABILITY 1 (On Hit) — Shatter: Applies Mining Fatigue to the enemy, weakening their attack feel and tool speed
+    shatter-cooldown: 8              # Seconds before Shatter can trigger again
+    shatter-level: 1                 # Effect level (1 = Mining Fatigue II)
+    shatter-duration: 8              # Seconds Mining Fatigue lasts
+    # ABILITY 2 (Right-click) — Ground Slam: Sends a shockwave around you, knocking back all nearby enemies
+    ground-slam-cooldown: 15         # Seconds before Ground Slam can be used again
+    ground-slam-radius: 6.0          # Block radius of the knockback shockwave
+    ground-slam-knockback: 1.5       # Knockback strength applied to hit entities
+
+  # --------------------------------------------------
+  # PHANTOM SPEAR
+  # A ghost spear built for evasion — disappear when
+  # cornered and dash through your enemies.
+  # --------------------------------------------------
+  phantom:
+    name: "&f&lPhantom Spear"
+    custom-model-data: 1005
+    # PASSIVE — Wraith Form: When you drop to or below X hearts, you turn totally invisible (armor + item hidden)
+    #           for a short duration. Long cooldown — use it wisely.
+    wraith-trigger-hearts: 3.0       # HP threshold to trigger Wraith Form (3.0 = 1.5 hearts shown)
+    wraith-duration: 15              # Seconds of full invisibility
+    wraith-cooldown: 300             # Seconds (5 minutes) before Wraith Form can trigger again
+    # ABILITY 1 (On Hit) — Puncture: Temporarily strips armor value from the enemy via attribute modifier
+    puncture-cooldown: 10            # Seconds before Puncture can trigger again
+    puncture-armor-reduction: 10     # Armor points temporarily removed from the target
+    puncture-duration: 6             # Seconds the armor reduction lasts
+    # ABILITY 2 (Right-click) — Phantom Dash: Brief invisibility burst + speed forward
+    phantom-dash-cooldown: 14        # Seconds before Phantom Dash can be used again
+    phantom-dash-speed-level: 2      # Speed effect level during dash (2 = Speed III)
+    phantom-dash-speed-duration: 40  # Ticks Speed lasts (20 ticks = 1 second)
+    phantom-dash-invisibility-ticks: 60 # Ticks of invisibility during dash (60 = 3 seconds)
+
+  # --------------------------------------------------
+  # FORTUNE SPEAR
+  # A luck-based spear that passively blesses you
+  # and randomly curses or blesses on demand.
+  # --------------------------------------------------
+  fortune:
+    name: "&6&lFortune Spear"
+    custom-model-data: 1006
+    # PASSIVE — Luck & Hero of the Village: While holding this spear you have Luck and Hero of the Village active
+    luck-level: 1                    # Luck effect level (1 = Luck II)
+    hero-level: 0                    # Hero of the Village level (0 = level I)
+    # ABILITY 1 (On Hit) — Curse: Applies a random negative effect from the pool below to the enemy
+    #           Each effect slot has its own independent cooldown — hitting applies one random effect,
+    #           but that specific effect cannot be applied again until its cooldown expires.
+    curse-duration: 30               # Seconds the negative effect lasts on the enemy
+    curse-cooldown: 60               # Seconds cooldown per individual effect slot
+    # Pool of negative effects that Curse randomly picks from
+    negative-effects:
+      - POISON          # Drains health over time
+      - WITHER          # Drains health and turns hearts black
+      - SLOWNESS        # Reduces movement speed
+      - WEAKNESS        # Reduces attack damage
+      - BLINDNESS       # Darkens vision and removes far rendering
+      - HUNGER          # Drains food bar faster
+      - NAUSEA          # Warps and spins the screen
+      - MINING_FATIGUE  # Slows tool and weapon use speed
+    # ABILITY 2 (Right-click) — Boon: Applies a random positive effect from the pool below to yourself
+    boon-duration: 30                # Seconds the positive effect lasts on you
+    boon-cooldown: 45                # Seconds before Boon can be used again
+    # Pool of positive effects that Boon randomly picks from
+    positive-effects:
+      - SPEED           # Increases movement speed
+      - STRENGTH        # Increases attack damage
+      - REGENERATION    # Slowly restores health
+      - RESISTANCE      # Reduces all incoming damage
+      - FIRE_RESISTANCE # Makes you immune to fire and lava
+      - ABSORPTION      # Adds temporary golden hearts
+      - HASTE           # Speeds up tool and weapon use
+      - JUMP_BOOST      # Increases jump height
+
+# =============================================
+# UI Settings
+# =============================================
+ui:
+  # How often the action bar cooldown display updates (in ticks, 20 = 1 second)
+  # Lower = smoother but more overhead. 2 ticks recommended.
+  cooldown-bar-update-ticks: 2
+  # Color of the cooldown bar text (&e = yellow, &b = aqua, etc.)
+  cooldown-bar-color: "&e"
+  # Whether to show ability descriptions in the item lore
+  show-lore-descriptions: true
+
+# =============================================
+# Trust System
+# =============================================
+trust:
+  # If true, trusted players are immune to ALL your spear abilities (no debuffs, no suppress, no chain, etc.)
+  # If false, trust only blocks targeted abilities (right-click suppress) but not AoE like Storm Surge
+  strict-mode: true
+
+# =============================================
+# General
+# =============================================
+general:
+  # Only one custom spear allowed per player inventory at a time
+  # If a player tries to pick up a second, it will be denied and they'll be notified
+  one-spear-per-inventory: true
+  # If true, custom spears are undroppable (they go back to inventory if thrown)
+  prevent-drop: false
+  # If true, custom spears cannot be placed in item frames or chests by players
+  prevent-storage: false

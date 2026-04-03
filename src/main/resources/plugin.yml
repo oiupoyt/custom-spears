@@ -1,0 +1,23 @@
+name: CustomSpears
+version: 1.0.0
+main: dev.kat.customspears.CustomSpears
+api-version: '1.21'
+description: Custom spears with unique abilities for PvP
+authors: [kat]
+
+commands:
+  spears:
+    description: Main spears command
+    usage: /spears <recipe|info|give> [spear] [player]
+    aliases: [cs]
+  trust:
+    description: Trust a player to be immune to your spear abilities
+    usage: /trust <add|remove|list|clear> [player]
+
+permissions:
+  customspears.give:
+    description: Allows giving custom spears
+    default: op
+  customspears.reload:
+    description: Allows reloading the plugin
+    default: op
